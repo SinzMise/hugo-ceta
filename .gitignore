@@ -105,4 +105,4 @@ dist
 
 .hugo_build.*
 
-public/
+public
