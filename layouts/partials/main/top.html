@@ -1,0 +1,77 @@
+<header>
+    <!-- 手机页面头部logo -->
+    <img class="index-logo" src="{{.Site.Params.ogImage}}">
+    <div class="welcome">
+        <span class="gradientText">{{ .Site.Title }}</span>
+    </div>
+    <div class="description">{{.Site.Params.desc | safeHTML}}</span>
+    </div>
+    <div class="iconContainer">
+        {{ if .Site.Params.social }}
+            {{ range .Site.Params.social }}
+                <a class="iconItem" onclick="" target="_blank" title="{{ .title | default (printf " Visit %s" .name) }}"
+                    href="{{ .url }}">
+                    {{ if .svg }}
+                    <!-- 自定义SVG图标 -->
+                    {{ .svg | safeHTML }}
+                    {{ else }}
+                    <!-- Font Awesome图标 -->
+                    <i class="{{ .icon }}"></i>
+                    {{ end }}
+                    <div class="iconTip">{{ .name }}</div>
+                </a>
+            {{ end }}
+        {{ end }}
+        <a class="switch" href="javascript:void(0)">
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
+                <label class="onoffswitch-label" for="myonoffswitch">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
+        </a>
+    </div>
+    <!--公告-->
+    {{ if .Site.Data.notice }}
+    <style type="text/css">
+        .zzbuluoled:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+    </style>
+    <div class="wp zzbuluoled" style="margin-top:0px;">
+        <div
+            style="background:url({{ .Site.Params.noticebg }}); text-align: center; height:80px; border: 0px solid #E8EFF5;">
+            <div id="zzbuluoled_sx" style="width:auto;overflow:hidden;height:80px;line-height:80px;text-align:left;">
+                <div id="zzbuluoled_sx1">
+                    <p style="padding:0px 10px 0px 16px;vertical-align:middle;height:80px;overflow:hidden;">
+                        <marquee direction="lelf" scrollamount="5"><strong>
+
+                                {{ range .Site.Data.notice }}
+                                    {{ if .link }}
+                                        <a href="{{ .link }}">
+                                            <span
+                                                style="font-family: 'Tahoma';font-weight:900; {{ if .color }}color: {{ .color }};{{end}} font-size: 30px;line-height:80px;">
+                                                {{ .text }}
+                                            </span>
+                                        </a>
+                                    {{ else }}
+                                        <span
+                                            style="font-family: 'Tahoma';font-weight:900; {{ if .color }}color: {{ .color }};{{end}} font-size: 30px;line-height:80px;">
+                                            {{ .text }}
+                                        </span>
+                                    {{ end }}
+                                {{ end }}
+
+                            </strong></marquee>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+</header>

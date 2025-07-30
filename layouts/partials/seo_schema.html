@@ -1,0 +1,63 @@
+<!-- 基础SEO元标签 -->
+<meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="keywords" content="{{ if .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ delimit .Site.Params.keywords ", " }}{{ end }}">
+
+<!-- Open Graph标签 -->
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}{{ .Site.Params.og.type }}{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Params.og.site_name }}">
+<meta property="og:locale" content="{{ .Site.Params.og.locale }}">
+
+<!-- OG图片（优先使用页面特色图片） -->
+{{ $ogImage := "" }}
+{{ if .Params.images }}
+  {{ $ogImage = index .Params.images 0 | absURL }}
+{{ else }}
+  {{ $ogImage = .Site.Params.ogImage | absURL }}
+{{ end }}
+<meta property="og:image" content="{{ $ogImage }}">
+
+<!-- Twitter Cards标签 -->
+{{ if .Site.Params.twitter }}
+<meta name="twitter:card" content="{{ .Site.Params.twitter.card }}">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta name="twitter:image" content="{{ $ogImage }}">
+<meta name="twitter:site" content="{{ .Site.Params.twitter.username }}">
+<meta name="twitter:creator" content="{{ .Site.Params.twitter.creator }}">
+{{ end }}
+
+<!-- 网站验证标签 -->
+{{ with .Site.Params.verification.google }}
+  <meta name="google-site-verification" content="{{ . }}">
+{{ end }}
+{{ with .Site.Params.verification.baidu }}
+  <meta name="baidu-site-verification" content="{{ . }}">
+{{ end }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ if .IsPage }}{{ .Params.schemaType | default "Article" }}{{ else }}{{ .Site.Params.og.type }}{{ end }}",
+  "headline": "{{ .Title }}",
+  "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+  "image": ["{{ $ogImage }}"],
+  "url": "{{ .Permalink }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Params.author | default .Site.Params.author }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ .Site.Params.favicon | absURL }}"
+    }
+  },
+  "datePublished": "{{ .Date.Format "2006-01-02" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02" }}"
+}
+</script>

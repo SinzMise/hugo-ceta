@@ -1,0 +1,12 @@
+<footer>
+    <span>&copy; {{ .Site.Params.footer.copy | default .Title }}</span>
+    <br />
+    {{ .Site.Params.footer.content | safeHTML }}
+    <br />
+    <span class="astro-OY55P3EK">
+        {{ if .Site.Params.date }}
+            <span class="astro-OY55P3EK">本站已运行 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+        {{ end }}
+        现在时间：<span id="show_time"></span>
+    </span>
+</footer>

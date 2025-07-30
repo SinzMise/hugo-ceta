@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="欢迎来到中弦世界之中的一个小空间">
+<meta name="keywords" content="中弦局,故事空间,主页">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<link rel="icon" href="/favicon.ico">
+
+{{ $main := resources.Get "/css/style.css" }}
+{{ $root := resources.Get "/css/root.css" }}
+{{ $right := resources.Get "/css/Right.css" }}
+{{ $loading := resources.Get "/css/loading.css" }}
+{{ $allcss := slice $main $root $right $loading | resources.Concat "/css/vendor.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">
