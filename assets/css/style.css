@@ -1,19 +1,4 @@
 @font-face {
-    font-family: "a";
-    /*中文字体*/
-    src: url(/fonts/STHeiti.ttf);
-    font-display: swap;
-}
-
-
-@font-face {
-    font-family: "b";
-
-    src: url(/fonts/LXGWHeartSerif.ttf);
-    font-display: swap;
-}
-
-@font-face {
     font-family: "title";
     /*英文字体*/
     src: url(/fonts/Pacifico-Regular.woff2);
@@ -80,7 +65,7 @@ body {
     min-height: 100vh;
     width: 100%;
     position: relative;
-    font-family: "b",  "a", sans-serif;
+    font-family: "LXGW Heart Serif",  "STHeiti", sans-serif;
     background: var(--main_bg_color);
     background-repeat: no-repeat;
     background-size: cover;

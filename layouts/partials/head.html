@@ -12,3 +12,6 @@
 {{ $loading := resources.Get "/css/loading.css" }}
 {{ $allcss := slice $main $root $right $loading | resources.Concat "/css/vendor.css" | minify | fingerprint }}
 <link rel="stylesheet" href="{{ $allcss.RelPermalink }}" integrity="{{ $allcss.Data.Integrity }}">
+
+<link rel="stylesheet" href="/fonts/LXGWHeartSerif/result.css">
+<link rel="stylesheet" href="/fonts/STHeiti/result.css">
